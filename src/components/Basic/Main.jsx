@@ -24,6 +24,8 @@ import { InfoProduct } from "../other_components/infoProfuct"
 export function Main() {
     let [isAboutActive, setIsAboutActive] = useState(false)
 
+    // console.log(UrlApi)
+
     const dispatch = useDispatch()
     const favState = useSelector((state) => state.fav.fav)
     const [directions, setDirections] = useState([]);
@@ -48,38 +50,38 @@ export function Main() {
                     let isinFav = favState.some(
                         (item) => item.country == direction.country
                     )
-                    return(
-                  <div className="Grid_main" key={index}>
-                    <div className="info_hotel">
-                        <h2>{direction.country_name}</h2>
-                        <h3>{direction.country}</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo distinctio cum aperiam dolor accusantium laudantium alias delectus ut harum quidem!</p>
-                        </div>
-                    <div className="info_hotel_money">
-                        <div>
-                        <p>Цена: 500$/24h</p>
-                        <button onClick={()=>{setIsAboutActive(!isAboutActive)}} >Забронировать</button>
-                        {isAboutActive ? (
-                            <div className="blur">
-                                <InfoProduct 
-                                setIsAboutActive={setIsAboutActive}>
-                                </InfoProduct>
+                    return (
+                        <div className="Grid_main" key={index}>
+                            <div className="info_hotel">
+                                <h2>{direction.country_name}</h2>
+                                <h3>{direction.country}</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo distinctio cum aperiam dolor accusantium laudantium alias delectus ut harum quidem!</p>
                             </div>
-                        ) : (
-                            <div></div>
-                        )}
+                            <div className="info_hotel_money">
+                                <div>
+                                    <p>Цена: 500$/24h</p>
+                                    <button onClick={() => { setIsAboutActive(!isAboutActive) }}>Забронировать</button>
+                                    {isAboutActive ? (
+                                        <div className="blur">
+                                            <InfoProduct setIsAboutActive={setIsAboutActive} />
+                                        </div>
+                                    ) : (
+                                        <div></div>
+                                    )}
+                                </div>
+                                <img src={isinFav ? fav2 : fav} onClick={() => {
+                                    dispatch(isinFav ? removeFromfav(direction) : addTofav(direction))
+                                }} alt="" />
+                            </div>
+                            <div className="hotel_img">
+                                <img src={selectedImage} alt="" />
+                            </div>
                         </div>
-                        <img src={isinFav ? fav2 : fav} onClick={()=>{
-                            dispatch(isinFav ? removeFromfav(direction) : addTofav(direction))
-                        }} alt="" />
-                        </div>
-                    <div className="hotel_img">
-                        <img src={selectedImage} alt="" /></div>
-                    </div>
                     )
-})}
+                })}
             </div>
         </div>
+
     );
 }
 
