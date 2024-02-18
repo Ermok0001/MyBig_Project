@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux"
-import { addTofav, removeFromfav } from "../../store/reducer"
+import {useSelector } from "react-redux"
+// import { addTofav, removeFromfav } from "../../store/reducer"
 
 export function Favoutite({direction}){
     const favState = useSelector((state)=> state.fav.fav)
