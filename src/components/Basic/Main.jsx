@@ -17,13 +17,15 @@ import { addTofav, removeFromfav } from "../../store/reducer"
 import { useDispatch, useSelector} from "react-redux"
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { InfoProduct } from "../other_components/infoProfuct"
 
 // //////////////////////////////////////////////////////////////////
 
-export function Main({hotels}) {
+export function Main() {
+    let [isAboutActive, setIsAboutActive] = useState(false)
+
     const dispatch = useDispatch()
     const favState = useSelector((state) => state.fav.fav)
-    let isinFav = favState.fav.some((item) => item.id == hotels.id)
     const [directions, setDirections] = useState([]);
     const UrlApi = "http://map.aviasales.ru/supported_directions.json?origin_iata=LED&one_way=false&locale=ru";
 
@@ -43,6 +45,9 @@ export function Main({hotels}) {
                 {directions.slice(0, 7).map((direction, index) => {
                     const image_country = [Paragway_img, China_img, Uar_img, Canada_img, Japan_img, France_img, Gond_img, Araw_img, Indonesi_png, Venes_img  ]
                     const selectedImage = image_country[index % image_country.length]
+                    let isinFav = favState.some(
+                        (item) => item.country == direction.country
+                    )
                     return(
                   <div className="Grid_main" key={index}>
                     <div className="info_hotel">
@@ -53,21 +58,28 @@ export function Main({hotels}) {
                     <div className="info_hotel_money">
                         <div>
                         <p>Цена: 500$/24h</p>
-                        <button>Забронировать</button>
+                        <button onClick={()=>{setIsAboutActive(!isAboutActive)}} >Забронировать</button>
+                        {isAboutActive ? (
+                            <div className="blur">
+                                <InfoProduct 
+                                setIsAboutActive={setIsAboutActive}>
+                                </InfoProduct>
+                            </div>
+                        ) : (
+                            <div></div>
+                        )}
                         </div>
                         <img src={isinFav ? fav2 : fav} onClick={()=>{
-                            dispatch(isinFav ? removeFromfav(hotels) : addTofav(hotels))
+                            dispatch(isinFav ? removeFromfav(direction) : addTofav(direction))
                         }} alt="" />
                         </div>
                     <div className="hotel_img">
                         <img src={selectedImage} alt="" /></div>
                     </div>
-                    
                     )
 })}
             </div>
         </div>
     );
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -4,7 +4,7 @@ body{
     height: 50em;
     background-color: #333333;
 }
-p{
+p, h2, h3,h4{
     color: white;
 }
 :link{
@@ -47,17 +47,20 @@ button{
 
 .SideBar{
     position: absolute;
+    text-align: left;
     top: 0;
-    left: -10em;
-    padding: 1em 5em;
+    left: 0em;
+    padding: 0.5em 3em 0em 2em;
     background-color: #17202a;
+    color: white;
+    font-size: 1.5em;
     height: 100vh;
     box-shadow: 10px 0px 10px rgba(0, 0, 0, 0.3) ;
-    transition: all 0.3s ease-in-out; 
   }
-  .SideBar.open{
-    position: fixed;
-    left: 0em;
+  .SideBar li{
+    color: white;
+    list-style: none;
+    cursor: pointer;
   }
 /* ///////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -96,6 +99,45 @@ button{
     border-radius: 1em;
 }
 
+.Info_Hotels{
+    position: relative;
+    background-color: #17202a;
+    border-radius: 80px;
+    padding: 2em 4em;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 20px;
+    width: 40%;
+    align-items: center;
+    border: 1px solid #999990;
+    height: 40%;
+}
+.Info_Hotel img{
+    height: 15em;
+    width: 15em;
+}
+.blur{
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.number_button button{
+    height: 2em;
+    width: 2em;
+    border-radius: 0.5em;
+    margin-bottom: 1em;
+}
+.button_reservation{
+    display: flex;
+    column-gap: 7em;
+}
 /* ///////////////////////////////////////////////////////////////////////////////////////////////// */
 
 .All_fav{
