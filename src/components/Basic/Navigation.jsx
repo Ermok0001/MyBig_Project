@@ -4,25 +4,24 @@ import search_img from "../assets/search.png";
 import person_img from "../assets/person_outline.png";
 import { useState } from "react";
 import { SideBar } from "../other_components/SideBar";
-import { useDispatch } from "react-redux";
-import { addToSortedContent } from "../../store/reducer";
-import { useHotelsQuery } from "../../store/api";
+import { useDispatch, useSelector } from "react-redux";
+import { addDataHotelsArray, } from "../../store/reducer";
 
 export function Navigation() {
     const dispatch = useDispatch();
-    const{ data: direction } = useHotelsQuery
+    let [inputValue, setinputValue] = useState('')
+    const hotelsArray = useSelector((state) => state.fav.hotelsArray)
 
     const [sideBar, setSideBar] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
 
     function handleSearch() {
-        if (direction) {
-            const sortedArray = direction.filter((item) => item.name.includes(searchTerm));
-            dispatch(addToSortedContent(sortedArray));
-        }
+        let filteredHotelArray = hotelsArray.filter(
+            (hotel) => hotel.country_name == inputValue
+        )
+        console.log(filteredHotelArray)
+        dispatch(addDataHotelsArray(filteredHotelArray))
     }
 
-    console.log(searchTerm)
     return (
         <div className="All_Navigation">
             <div className="Navigation">
@@ -43,12 +42,12 @@ export function Navigation() {
                     <Link to="/support"><p>Support</p></Link>
                 </div>
                 <div className="Search_Navigation">
-                    <img style={{ cursor: 'pointer' }} onClick={handleSearch} src={search_img} alt="Search" />
+                    <img style={{ cursor: 'pointer' }} onClick={()=>{handleSearch()}} src={search_img} alt="Search" />
                     <input 
                         type="text" 
                         placeholder="Search"
-                        value={searchTerm}
-                        onChange={(e) => { setSearchTerm(e.target.value) }} />
+                        value={inputValue}
+                        onChange={(e) => { setinputValue(e.target.value) }} />
                     <img style={{ cursor: 'pointer' }} src={person_img} alt="Person" />
                 </div>
             </div>

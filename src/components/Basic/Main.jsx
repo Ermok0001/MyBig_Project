@@ -13,7 +13,7 @@ import fav from "../assets/favorite_border.png"
 
 // //////////////////////////////////////////////////////////////////
 
-import { addTofav, removeFromfav } from "../../store/reducer"
+import { addDataHotelsArray, addTofav, removeFromfav } from "../../store/reducer"
 import { useDispatch, useSelector} from "react-redux"
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -25,13 +25,14 @@ export function Main() {
     let [isAboutActive, setIsAboutActive] = useState(false)
     const dispatch = useDispatch()
     const favState = useSelector((state) => state.fav.fav)
-    const [directions, setDirections] = useState([]);
+    const  hotelsArray = useSelector((state) => state.fav.hotelsArray)
+    console.log(hotelsArray)
     const UrlApi = "http://map.aviasales.ru/supported_directions.json?origin_iata=LED&one_way=false&locale=ru";
 
     useEffect(() => {
         axios.get(UrlApi)
             .then((resp) => {
-                setDirections(resp.data.directions);
+                dispatch(addDataHotelsArray(resp.data.directions))
             })
     }, []);
 
@@ -41,7 +42,7 @@ export function Main() {
                 <h1>Popular Hotels</h1>
             </div>
             <div>
-                {directions.slice(0, 7).map((direction, index) => {
+                {hotelsArray.slice(0, 7).map((direction, index) => {
                     const image_country = [Paragway_img, China_img, Uar_img, Canada_img, Japan_img, France_img, Gond_img, Araw_img, Indonesi_png, Venes_img  ]
                     const selectedImage = image_country[index % image_country.length]
                     let isinFav = favState.some(
