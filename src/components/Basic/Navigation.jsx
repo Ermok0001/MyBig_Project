@@ -10,13 +10,14 @@ import { useHotelsQuery } from "../../store/api";
 
 export function Navigation() {
     const dispatch = useDispatch();
+    const{ data: direction } = useHotelsQuery
+
     const [sideBar, setSideBar] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
-    const{ data: direction } = useHotelsQuery
 
     function handleSearch() {
         if (direction) {
-            const sortedArray = direction.filter((item) => item.title.includes(searchTerm));
+            const sortedArray = direction.filter((item) => item.name.includes(searchTerm));
             dispatch(addToSortedContent(sortedArray));
         }
     }
@@ -54,3 +55,5 @@ export function Navigation() {
         </div>
     );
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

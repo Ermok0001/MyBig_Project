@@ -10,7 +10,8 @@ import Indonesi_png from "../assets/Indonesi.png"
 import Venes_img from "../assets/Venes.png"
 import { useState } from "react";
 
-export function InfoProduct({setIsAboutActive}){
+
+export function InfoProduct({ setIsAboutActive, direction }) {
     const [images] = useState([
         Paragway_img,
         China_img,
@@ -24,32 +25,37 @@ export function InfoProduct({setIsAboutActive}){
         Venes_img
     ]);
 
-    const getRandomImage = () => {
+    const [numberPeople, setNumberOfPeople] = useState(1);
+
+    function getRandomImage(){
         const randomIndex = Math.floor(Math.random() * images.length);
         return images[randomIndex];
     };
-    return(
+
+    function handleReservation(){
+        alert(`Забронирована на ${numberPeople} человек(a)`);
+    };
+
+    return (
         <div className="Info_Hotels">
             <div className="Info_Hotel">
                 <img src={getRandomImage()} alt="" />
             </div>
             <div>
-                <h1>Hotel:</h1>
+                <h1>Hotel: {direction.country_name}</h1>
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel deleniti fugiat repudiandae officia impedit. Laboriosam fugiat tempora ex sapiente. </p>
                 <div className="number_button">
-                    <p>На сколько человек:</p>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
+                    <p>На сколько человек: {numberPeople}</p>
+                    <button onClick={() => setNumberOfPeople(1)}>1</button>
+                    <button onClick={() => setNumberOfPeople(2)}>2</button>
+                    <button onClick={() => setNumberOfPeople(3)}>3</button>
+                    <button onClick={() => setNumberOfPeople(4)}>4</button>
                 </div>
                 <div className="button_reservation">
-            <button onClick={()=>{alert("Забронирована")}} >Забронировать</button>
-            <button onClick={()=>{
-                setIsAboutActive(false)
-            }}>Выбрать другой</button>
-            </div>
+                    <button onClick={handleReservation}>Забронировать</button>
+                    <button onClick={() => setIsAboutActive(false)}>Выбрать другой</button>
+                </div>
             </div>
         </div>
-    )
+    );
 }

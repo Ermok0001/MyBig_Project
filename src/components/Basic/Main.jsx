@@ -23,9 +23,6 @@ import { InfoProduct } from "../other_components/infoProfuct"
 
 export function Main() {
     let [isAboutActive, setIsAboutActive] = useState(false)
-
-    // console.log(UrlApi)
-
     const dispatch = useDispatch()
     const favState = useSelector((state) => state.fav.fav)
     const [directions, setDirections] = useState([]);
@@ -63,7 +60,9 @@ export function Main() {
                                     <button onClick={() => { setIsAboutActive(!isAboutActive) }}>Забронировать</button>
                                     {isAboutActive ? (
                                         <div className="blur">
-                                            <InfoProduct setIsAboutActive={setIsAboutActive} />
+                                            <InfoProduct setIsAboutActive={setIsAboutActive} 
+                                            direction={direction}
+                                            />
                                         </div>
                                     ) : (
                                         <div></div>

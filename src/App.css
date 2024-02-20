@@ -147,6 +147,25 @@ button{
     border-radius: 1em;
     padding: 0.5em 1em 0.5em 1em;
 }
+.fav_hotelsInfo{
+    display: flex;
+    align-items: center;
+    width: 70em;
+    column-gap: 2em;
+    padding: 1em;
+}
+.fav_hotelsInfo img{
+    height: 10em;
+    border-radius: 1em;
+}
+.fav_img img{
+    height: 2em;
+}
+.fav_hotelsInfo button{
+    background-color: #eae0c8;
+    height: 3em;
+    border-radius: 1em;
+}
 
 /* ///////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -223,3 +242,4 @@ button{
     flex-direction: column;
     justify-content: center;
 }
+

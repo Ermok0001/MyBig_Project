@@ -15,7 +15,7 @@ export function Support(){
                 </div>
                 <div className="Info_Support">
                     <input type="text"  placeholder="Проблема в другом"/>
-                    <button>Отправить</button>
+                    <button onClick={()=>{alert("Жалоба отправлена")}} >Отправить</button>
                 </div>
             </div>
             <div>
